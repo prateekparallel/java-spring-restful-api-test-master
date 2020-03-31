@@ -72,7 +72,7 @@ public class HttpRequestTest extends HttpMockMvcTest{
     	
     	ResponseEntity<?> responseEntity = restTemplate.getForEntity(getHostNameAndPort() + "/person/smith", 
     			String.class);
-    	System.out.println("Abhijit_1" + responseEntity.getStatusCode());
+    
     	assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
        
     }

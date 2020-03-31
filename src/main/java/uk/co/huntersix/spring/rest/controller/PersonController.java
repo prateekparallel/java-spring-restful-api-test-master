@@ -36,7 +36,7 @@ public class PersonController {
 	}
 
 	
-	@GetMapping("/person/all/{lastName}")
+	@GetMapping("/person/{lastName}")
 	public ResponseEntity<?> person(@PathVariable(value = "lastName") String lastName) {
 		List<Person> pList = personDataService.findPersonList(lastName);
 
@@ -51,7 +51,7 @@ public class PersonController {
 
 	
 	
-	@PostMapping(path="/person/register",consumes = "application/json", produces = "application/json")
+	@PostMapping(path="/person",consumes = "application/json", produces = "application/json")
 	public ResponseEntity<String> register(@RequestBody Person p) throws Exception {
 
 		if( p == null || p.getFirstName().isEmpty() || p.getLastName().isEmpty()) {
@@ -70,7 +70,7 @@ public class PersonController {
 	}
 	
 	
-	@PutMapping(path="/person/update/{newFirstName}",consumes = "application/json", produces = "application/json")
+	@PutMapping(path="/person/{newFirstName}",consumes = "application/json", produces = "application/json")
 	public ResponseEntity<?> updatePerson(@PathVariable(value = "newFirstName") String newFirstName, @RequestBody Person p) throws Exception {
 
 		if( p == null || p.getFirstName().isEmpty() || p.getLastName().isEmpty()) {

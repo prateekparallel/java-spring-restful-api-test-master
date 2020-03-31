@@ -74,7 +74,7 @@ public class PersonControllerTest {
     	personList.add(new Person("Mark", "Smith"));
     	
         when(personDataService.findPersonList(any())).thenReturn(personList);
-        this.mockMvc.perform(get("/person/all/smith"))
+        this.mockMvc.perform(get("/person/smith"))
             .andDo(print())
             .andExpect(status().isOk())
             .andExpect(jsonPath("$[0].lastName").value("Smith"))
@@ -86,30 +86,19 @@ public class PersonControllerTest {
     public void shouldRegisterPerson() throws Exception {
      	Person p  = new Person("Abhijit", "Smith");    	
         when(personDataService.findPerson(any(),any())).thenReturn(null);
-        this.mockMvc.perform(post("/person/register")
+        this.mockMvc.perform(post("/person")
             .contentType(APPLICATION_JSON)
             .content(new ObjectMapper().writeValueAsString(p)))
             .andDo(print())
             .andExpect(status().isCreated());
-    }
-    
-    
-    @Test
-    public void shouldReturnConflicStatusForDuplicateEntry() throws Exception {
-    	Person person = new Person("Collin", "Brown");
-        when(personDataService.findPerson(any(), any())).thenReturn( new Person("Collin", "Brown"));        
-        this.mockMvc.perform(post("/person/register")
-                        .contentType(APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(person)))
-                .andDo(print())
-                .andExpect(status().isConflict());
-    }
+    }    
+
     
     @Test
     public void shouldUpdatePerson() throws Exception {
      	Person p  = new Person("Abhijit", "Archer");    	
         when(personDataService.findPerson(any(),any())).thenReturn(p);
-        this.mockMvc.perform(put("/person/update/NewName")
+        this.mockMvc.perform(put("/person/NewName")
             .contentType(APPLICATION_JSON)
             .content(new ObjectMapper().writeValueAsString(p)))
             .andDo(print())

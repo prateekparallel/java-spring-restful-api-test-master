@@ -65,20 +65,7 @@ public class HttpRequestTest extends HttpMockMvcTest{
        
     }
     
-    
-    
-    @Test
-    public void shouldReturnNotFoundStatusCodeWhenMissingFirstName() throws Exception {
-    	
-    	ResponseEntity<?> responseEntity = restTemplate.getForEntity(getHostNameAndPort() + "/person/smith", 
-    			String.class);
-    
-    	assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-       
-    }
-    
-    
-    
+      
     @Test
     public void shouldReturnFoundStatusCodeWhenSendingCorrectEntry() throws Exception {
     	ResponseEntity<?> responseEntity = restTemplate.getForEntity(getHostNameAndPort() + "/person/smith/mary", 
@@ -92,7 +79,7 @@ public class HttpRequestTest extends HttpMockMvcTest{
     public void shouldReturnListOfPersonDetails() throws Exception {
     	
     	ResponseEntity<List<Person>> response =
-    	        restTemplate.exchange(getHostNameAndPort() + "/person/all/smith",
+    	        restTemplate.exchange(getHostNameAndPort() + "/person/smith",
     	                    HttpMethod.GET, null, new ParameterizedTypeReference<List<Person>>() {
     	            });
     	
@@ -112,7 +99,7 @@ public class HttpRequestTest extends HttpMockMvcTest{
     	
     	Person person = new Person("Abhijit","Dutta");
     	
-    	ResponseEntity<String> response = restTemplate.postForEntity(getHostNameAndPort() + "/person/register", person, String.class);
+    	ResponseEntity<String> response = restTemplate.postForEntity(getHostNameAndPort() + "/person", person, String.class);
        
     	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     	
@@ -125,7 +112,7 @@ public class HttpRequestTest extends HttpMockMvcTest{
     	// Below entry already available in the Person list - hence duplicate entry
     	Person person = new Person("Mary", "Smith");
     	
-    	ResponseEntity<String> response = restTemplate.postForEntity(getHostNameAndPort() + "/person/register", person, String.class);
+    	ResponseEntity<String> response = restTemplate.postForEntity(getHostNameAndPort() + "/person", person, String.class);
         
     	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
     	
@@ -137,7 +124,7 @@ public class HttpRequestTest extends HttpMockMvcTest{
     	// Below entry already available in the Person list - hence duplicate entry
     	Person person = new Person("", "");
     	
-    	ResponseEntity<String> response = restTemplate.postForEntity(getHostNameAndPort() + "/person/register", person, String.class);
+    	ResponseEntity<String> response = restTemplate.postForEntity(getHostNameAndPort() + "/person", person, String.class);
         
     	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     	
@@ -153,7 +140,7 @@ public class HttpRequestTest extends HttpMockMvcTest{
     	loginJSonRequest.put("lastName", "Brown");
     	
     	RequestBuilder requestBuilder = MockMvcRequestBuilders
-				.put(getHostNameAndPort() + "/person/update/Abhijit")
+				.put(getHostNameAndPort() + "/person/Abhijit")
 				.accept(MediaType.APPLICATION_JSON)
 				.content(loginJSonRequest.toString())
 				.contentType(MediaType.APPLICATION_JSON);
@@ -174,7 +161,7 @@ public class HttpRequestTest extends HttpMockMvcTest{
     	loginJSonRequest.put("lastName", "Kom");
     	
     	RequestBuilder requestBuilder = MockMvcRequestBuilders
-				.put(getHostNameAndPort() + "/person/update/Abhijit")
+				.put(getHostNameAndPort() + "/person/Abhijit")
 				.accept(MediaType.APPLICATION_JSON)
 				.content(loginJSonRequest.toString())
 				.contentType(MediaType.APPLICATION_JSON);
@@ -194,7 +181,7 @@ public class HttpRequestTest extends HttpMockMvcTest{
     	loginJSonRequest.put("lastName", "");
     	
     	RequestBuilder requestBuilder = MockMvcRequestBuilders
-				.put(getHostNameAndPort() + "/person/update/Abhijit")
+				.put(getHostNameAndPort() + "/person/Abhijit")
 				.accept(MediaType.APPLICATION_JSON)
 				.content(loginJSonRequest.toString())
 				.contentType(MediaType.APPLICATION_JSON);

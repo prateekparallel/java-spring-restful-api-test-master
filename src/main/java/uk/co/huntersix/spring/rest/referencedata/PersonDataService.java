@@ -74,4 +74,8 @@ public class PersonDataService {
 		}
 		return false;
 	}
+	
+	public String testStaticMethod(String msg) {
+		return Utils.justForTest(msg);
+	}
 }

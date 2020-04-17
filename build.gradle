@@ -46,6 +46,9 @@ targetCompatibility = 1.8
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
+    testCompile('org.powermock:powermock-core:${versions.mockito}')
+    testCompile('org.powermock:powermock-module-junit4:${versions.powermock}')
+    testCompile('org.powermock:powermock-api-mockito2:${versions.powermock}')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     compile 'commons-lang:commons-lang:2.3'
 }

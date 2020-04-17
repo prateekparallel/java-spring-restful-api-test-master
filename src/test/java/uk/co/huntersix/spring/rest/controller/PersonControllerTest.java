@@ -1,5 +1,6 @@
 package uk.co.huntersix.spring.rest.controller;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -25,6 +26,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import uk.co.huntersix.spring.rest.model.Person;
+import uk.co.huntersix.spring.rest.referencedata.MyList;
 import uk.co.huntersix.spring.rest.referencedata.PersonDataService;
 
 @RunWith(SpringRunner.class)
@@ -36,6 +38,9 @@ public class PersonControllerTest {
 
 	@MockBean
 	private PersonDataService personDataService;
+	
+	@MockBean
+	private MyList myLIst;
 
 	@Test
 	public void shouldReturnPersonFromService() throws Exception {
@@ -117,4 +122,12 @@ public class PersonControllerTest {
 						.content(new ObjectMapper().writeValueAsString(p)))
 				.andDo(print()).andExpect(status().isNotAcceptable());
 	}
+	
+	/* mokito dont support this functionalities
+	@Test
+	public void justTestingAFinalMethod() throws Exception {
+		when(myLIst.finalMethod()).thenReturn(1);
+		
+		assertEquals(1, myLIst.finalMethod());
+	}*/
 }

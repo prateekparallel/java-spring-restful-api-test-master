@@ -74,4 +74,16 @@ public class PersonDataService {
 		}
 		return false;
 	}
+	
+	public String testStaticMethod(String msg) {
+		return Utils.justForTest(msg);
+	}
+	
+	private String privateMethod() {
+		return "I am a Private method";
+	}
+	
+	public String testPrivateMethod() {
+		return privateMethod();
+	}
 }
